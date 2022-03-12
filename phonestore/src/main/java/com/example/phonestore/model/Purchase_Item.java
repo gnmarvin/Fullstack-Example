@@ -12,19 +12,22 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Stock")
-public class Stock {
+@Table(name="purchase_item")
+public class Purchase_Item {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id", columnDefinition="bigint", nullable=false)
     private int id;
 
-    @Column(name="name", length=100, nullable=false)
-    private String name;
+    @Column(name="user_id", columnDefinition="bigint", nullable=false)
+    private int user_id;
+
+    @Column(name="item_id", columnDefinition="bigint", nullable=false)
+    private int item_id;
 
     @Column(name="quantity", columnDefinition="bigint", nullable=false)
     private int quantity;
 
-    @Column(name="price", columnDefinition="double", nullable=false)
-    private int price;
+    @Column(name="date", columnDefinition="date", nullable=false)
+    private  java.sql.Date date;
 }
