@@ -1,9 +1,12 @@
 package com.example.phonestore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -12,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="purchase_item")
+@Table(name="Purchase_item")
 public class Purchase_Item {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,8 +25,10 @@ public class Purchase_Item {
     @Column(name="user_id", columnDefinition="bigint", nullable=false)
     private int user_id;
 
-    @Column(name="item_id", columnDefinition="bigint", nullable=false)
-    private int item_id;
+    @ManyToOne(fetch=FetchType.LAZY, optional=false)
+    @JoinColumn(name="item_id", columnDefinition="bigint", nullable=false)
+    @OnDelete(action=OnDeleteAction.CASCADE)
+    private Stock stock;
 
     @Column(name="quantity", columnDefinition="bigint", nullable=false)
     private int quantity;
